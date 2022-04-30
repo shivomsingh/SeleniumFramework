@@ -19,10 +19,12 @@ public class DriverFactory {
     /**
      * This method is initialising driver on the basis of browser name provided in method
      * This driver will take care of local and remote execution
-     * @param browserName
+     * Here, we're taking prop as parameter in init_driver method, this is also example of call by reference (as prop is reference)
+     * @param prop
      * @return the webdriver object driver
      */
-    public WebDriver init_driver(String browserName){
+    public WebDriver init_driver(Properties prop){
+        String browserName = prop.getProperty("browser").trim();
         System.out.println("Given browser name is "+ browserName);
         if(browserName.equalsIgnoreCase("chrome")){
             WebDriverManager.chromedriver().setup();
@@ -33,6 +35,7 @@ public class DriverFactory {
             driver = new FirefoxDriver();
         }
         else if(browserName.equalsIgnoreCase("safari")){
+            WebDriverManager.safaridriver().setup();
             driver = new SafariDriver();
         }
         else {
@@ -41,7 +44,7 @@ public class DriverFactory {
 
         driver.manage().deleteAllCookies();
         driver.manage().window().fullscreen();
-        driver.get("");
+        driver.get(prop.getProperty("url"));
 
         return driver;
     }
