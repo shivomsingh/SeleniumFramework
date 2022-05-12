@@ -1,8 +1,12 @@
 package pageLayers;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import utils.ConstantUtil;
+import utils.ElementUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,16 +14,20 @@ import java.util.List;
 public class AccountsPage {
 
     private WebDriver driver;
-    private By header = By.cssSelector("div#logo a");
+    private ElementUtil eleUtil;
+
+    private By header = By.xpath("//*[text()='Account']");
     private By search = By.name("search");
+    private By searchButton = By.cssSelector("div#search button");
     private By accSectionList = By.cssSelector("div#content h2");
 
     public AccountsPage(WebDriver driver){
         this.driver = driver;
+        eleUtil = new ElementUtil(driver);
     }
 
     public List<String> getAccountsPageSectionList(){
-        List<WebElement> secList = driver.findElements(accSectionList);
+        List<WebElement> secList = eleUtil.getElements(accSectionList);
         List<String> accSecValList = new ArrayList<String>();
         for(WebElement e: secList){
             accSecValList.add(e.getText());
@@ -28,15 +36,28 @@ public class AccountsPage {
     }
 
     public String getAccountPageTitle(){
-        return driver.getTitle();
+        return eleUtil.waitForTitleIs(ConstantUtil.DEFAULT_WAIT_TIME, ConstantUtil.ACCOUNT_PAGE_TITLE);
     }
 
     public boolean isAccPageHeaderExists(){
-        return driver.findElement(header).isDisplayed();
+        return eleUtil.doIsDisplayed(header);
+    }
+
+    public String getAccPageHeader() {
+        return driver.findElement(header).getText();
     }
 
     public boolean isAccPageSearchOptionExits(){
-        return driver.findElement(search).isDisplayed();
+        return eleUtil.doIsDisplayed(search);
+    }
+
+    public SearchResultPage doSearch(String productName){
+        if(isAccPageSearchOptionExits()){
+            eleUtil.doSendKeys(search, productName);
+            eleUtil.doClick(searchButton);
+            return new SearchResultPage(driver);
+        }
+        return null;
     }
 
 }

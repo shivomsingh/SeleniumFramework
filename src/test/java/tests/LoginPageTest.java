@@ -2,6 +2,7 @@ package tests;
 
 import base.BaseTest;
 import org.testng.Assert;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import utils.ConstantUtil;
 
@@ -26,13 +27,23 @@ public class LoginPageTest extends BaseTest {
         Assert.assertTrue(loginpage.isForgotPasswordLinkExist());
     }
 
-    @Test
-    public void loginTest(){
-        loginpage.doLogin("ramshankar@pokemail.net", "Test@1234");
+    @DataProvider
+    public Object[][] getUserData(){
+        return new Object[][]{
+                {"ramshankar@pokemail.net", "Test@1234"}
+        };
+    }
+
+    @Test(dataProvider = "getUserData")
+    public void loginTest(String userEmail, String password) {
+        accPage = loginpage.doLogin(userEmail, password);
+        Assert.assertTrue(accPage.isAccPageHeaderExists());
+        Assert.assertEquals(accPage.getAccPageHeader(), "Account");
     }
 
     @Test
     public void isRegistrationLinkExist(){
+
         Assert.assertTrue(loginpage.isRegistrationLinkExist());
     }
 }

@@ -12,7 +12,7 @@ public class LoginPage {
 
     private By email = By.id("input-email");
     private By password = By.id("input-password");
-    private By logIn = By.xpath("//input[@name='email']");
+    private By logIn = By.xpath("//input[@value='Login']");
     private By forgotPassword = By.linkText("Forgotten Password");
     private By register = By.linkText("Register");
 
@@ -45,9 +45,11 @@ public class LoginPage {
         return eleUtil.doIsDisplayed(register);
     }
 
-    public void navigateToRegistrationPage(){
+    public RegistrationPage navigateToRegistrationPage(){
         if(isRegistrationLinkExist()){
             eleUtil.doClick(register);
+            return new RegistrationPage(driver);
         }
+        return null;
     }
 }
