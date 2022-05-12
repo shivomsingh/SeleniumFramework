@@ -45,4 +45,31 @@ public class AccountPageTest extends BaseTest {
         System.out.println("Actual Section List: "+ actualSectionList);
         Assert.assertEquals(actualSectionList, ConstantUtil.EXPECTED_ACCOUNT_SECTION_LIST);
     }
+
+    @Test
+    public void searchHeaderTest(){
+        searchPage = accPage.doSearch(ConstantUtil.SEARCH_STRING);
+        Assert.assertTrue(searchPage.isResultsHeaderExists());
+    }
+
+    @Test
+    public void getSearchHeaderTest(){
+        searchPage = accPage.doSearch(ConstantUtil.SEARCH_STRING);
+        Assert.assertEquals(searchPage.getResultPageHeader(), "Search - " + ConstantUtil.SEARCH_STRING);
+    }
+
+    @Test
+    public void productSizeTest(){
+        searchPage = accPage.doSearch(ConstantUtil.SEARCH_STRING);
+        Assert.assertEquals(searchPage.getProductsCount(), ConstantUtil.PRODUCT_LIST_SIZE);
+    }
+
+    @Test
+    public void getProductsTest(){
+        searchPage = accPage.doSearch(ConstantUtil.SEARCH_STRING);
+        List<String> actualProductList = searchPage.getProductList();
+        System.out.println(actualProductList);
+    }
+
+
 }
