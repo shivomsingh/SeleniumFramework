@@ -29,7 +29,7 @@ public class BaseTest {
     @BeforeTest
     public void setup(){
         df = new DriverFactory();
-        prop = df.init_prop("./src/test/resources/config/config.properties");
+        prop = df.init_prop();
         driver = df.init_driver(prop);
         softAssert = new SoftAssert();
         loginpage = new LoginPage(driver);
