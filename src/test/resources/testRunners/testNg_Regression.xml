@@ -9,6 +9,8 @@
                 class-name="listneres.ExtentReportListener" />
         <listener
                 class-name="listneres.TestAllureListener" />
+        <listener
+                class-name="listneres.AnnotationTransformer" />
 
 
     </listeners>
@@ -16,6 +18,12 @@
     <test name="Open Cart Login Page Test">
         <classes>
             <class name="tests.LoginPageTest" />
+        </classes>
+    </test>
+
+    <test name="Open Cart Negative Login Page Test">
+        <classes>
+            <class name="tests.LoginPageNegativeTest" />
         </classes>
     </test>
 

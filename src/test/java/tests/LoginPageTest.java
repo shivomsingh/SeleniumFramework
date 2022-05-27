@@ -5,6 +5,7 @@ import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import utils.ConstantUtil;
+import utils.Errorsutil;
 
 public class LoginPageTest extends BaseTest {
 
@@ -12,7 +13,7 @@ public class LoginPageTest extends BaseTest {
     public void loginPageTitleTest(){
         String accTitle = loginpage.getPageTitle();
         System.out.println("account page title: " + accTitle);
-        Assert.assertEquals(accTitle, ConstantUtil.LOGIN_PAGE_TITLE);
+        Assert.assertEquals(accTitle, ConstantUtil.LOGIN_PAGE_TITLE, Errorsutil.LOGIN_PAGE_TITLE_ERROR_MSG);
     }
 
     @Test
