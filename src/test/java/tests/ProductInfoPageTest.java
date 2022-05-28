@@ -19,7 +19,7 @@ public class ProductInfoPageTest extends BaseTest {
     public void productHeaderTest(){
         searchPage = accPage.doSearch(ConstantUtil.SEARCH_STRING);
         proInfoPage = searchPage.addProduct();
-        Assert.assertEquals(proInfoPage.productHeader(), "MacBook");
+        Assert.assertEquals(proInfoPage.productHeader(), "MacBook Pro");
     }
 
     @Test
