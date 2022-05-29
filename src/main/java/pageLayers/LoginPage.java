@@ -1,6 +1,8 @@
 package pageLayers;
 
+import factory.DriverFactory;
 import io.qameta.allure.Step;
+import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -10,6 +12,7 @@ import utils.Errorsutil;
 
 public class LoginPage {
 
+    public static final Logger log = Logger.getLogger(LoginPage.class);
     private WebDriver driver;
     private ElementUtil eleUtil;
 
@@ -27,6 +30,7 @@ public class LoginPage {
 
 //    3. public page actions
     public String getPageTitle(){
+        log.info("in login page title test");
         return eleUtil.waitForTitleIs(ConstantUtil.DEFAULT_WAIT_TIME, ConstantUtil.LOGIN_PAGE_TITLE);
     }
 
